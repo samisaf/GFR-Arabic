@@ -57,7 +57,7 @@ export function App() {
 
   let GFR = Math.round(calcGFR(Scr, Age, Gender))
   let output1 = "معدل الرشح الكبيبي الكلوي"
-  let output2 = "ميلي ليتر | دقيقة | متر مربع"
+  let output2 = " (ميلي ليتر | دقيقة | ١.٧٣ متر مربع)"
   let output3 = `${output1} ${GFR} ${output2}`
   let output = Scr && Age && Gender && output3
   return (
