@@ -1,5 +1,5 @@
-import { useState } from 'preact/hooks'
 import './app.css'
+import { useState } from 'preact/hooks'
 import Alert from '@mui/material/Alert';
 import TextField from '@mui/material/TextField';
 import Radio from '@mui/material/Radio';
@@ -7,10 +7,10 @@ import RadioGroup from '@mui/material/RadioGroup';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import FormControl from '@mui/material/FormControl';
 import FormLabel from '@mui/material/FormLabel';
-import rtlPlugin from 'stylis-plugin-rtl';
 import { CacheProvider } from '@emotion/react';
 import createCache from '@emotion/cache';
 import { prefixer } from 'stylis';
+import rtlPlugin from 'stylis-plugin-rtl';
 
 // Create rtl cache
 const cacheRtl = createCache({ key: 'muirtl', stylisPlugins: [prefixer, rtlPlugin], });
@@ -51,69 +51,77 @@ export function App() {
   let output1 = "معدل الرشح الكبيبي الكلوي"
   let output2 = " (ميلي ليتر | دقيقة | ١.٧٣ متر مربع)"
   let output3 = `${output1} ${GFR} ${output2}`
-  let output = (Scr > 0) && (Age > 0) && Gender && output3
+  let output = (Scr > 0) && (Age > 0) && (GFR > 0) && Gender && output3
 
   return (
     <CacheProvider value={cacheRtl}>
       <h1>{title}</h1>
-      <Alert severity="warning">
-        {description.map((i) => (
-          <p>{i}</p>
-        ))}
-      </Alert>
-      <br></br>
+      {/* Information Section */}
+      <p>
+        <Alert severity="warning">
+          {description.map((i) => (
+            <p>{i}</p>
+          ))}
+        </Alert>
+      </p>
 
-      <Alert severity="info">
-        <TextField
-          error={Scr <= 0 ? true : false}
-          id="serum-creatinine"
-          label="تركيز الكرياتينين (مغ|دسل)"
-          type="number"
-          value={Scr}
-          placeholder=''
-          onInput={e => setScr(e.target.value)}
-          variant="standard"
-          fullWidth
-        />
+      {/* Data Entry Section */}
+      <p>
+        <Alert severity="info">
+          <TextField
+            error={Scr <= 0 ? true : false}
+            id="serum-creatinine"
+            label="تركيز الكرياتينين (مغ|دسل)"
+            type="number"
+            value={Scr}
+            placeholder=''
+            onInput={e => setScr(e.target.value)}
+            variant="standard"
+            fullWidth
+          />
+          <TextField
+            error={Age <= 0 ? true : false}
+            id="age"
+            label="العمر (سنة)"
+            type="number"
+            value={Age}
+            placeholder=''
+            onInput={e => setAge(e.target.value)}
+            variant="standard"
+            fullWidth
+          />
+          <p>
+            <FormControl>
+              <FormLabel id="demo-radio-buttons-group-label">الجنس</FormLabel>
+              <RadioGroup
+                row
+                id="gender"
+                name="radio-buttons-group"
+                onInput={e => setGender(e.target.value)}
+              >
+                <FormControlLabel value="Female" control={<Radio />} label="امرأة" />
+                <FormControlLabel value="Male" control={<Radio />} label="رجل" />
+              </RadioGroup>
+            </FormControl>
+          </p>
+        </Alert>
+      </p>
 
-        <TextField
-          id="age"
-          error={Age <= 0 ? true : false}
-          label="العمر (سنة)"
-          type="number"
-          value={Age}
-          placeholder=''
-          onInput={e => setAge(e.target.value)}
-          variant="standard"
-          fullWidth
-        />
+      {/* Results Section */}
+      <p>
+        <Alert severity="success">
+          {output ? output : outputMessage}
+        </Alert>
 
-        <p></p>
+      </p>
 
-        <FormControl>
-          <FormLabel id="demo-radio-buttons-group-label">الجنس</FormLabel>
-          <RadioGroup
-            row
-            id="gender"
-            name="radio-buttons-group"
-            onInput={e => setGender(e.target.value)}
-          >
-            <FormControlLabel value="Female" control={<Radio />} label="امرأة" />
-            <FormControlLabel value="Male" control={<Radio />} label="رجل" />
-          </RadioGroup>
-        </FormControl>
-      </Alert>
-      <br></br>
-
-      <Alert severity="success">
-        {output ? output : outputMessage}
-      </Alert>
-
-      <br></br>
-      <Alert severity="error" >
-        {aboutMessage}
-        <a href="mailto:samisaf@gmail.com">الرابط</a>
-      </Alert>      </CacheProvider>
-
+      {/* Contacts Us Section */}
+      <p>
+        <Alert severity="error" >
+          {aboutMessage}
+          <a href="mailto:samisaf@gmail.com">الرابط</a>
+        </Alert>
+      </p>
+    </CacheProvider>
   )
 }
