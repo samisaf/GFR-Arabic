@@ -33,17 +33,18 @@
   </script>
 <h3>eGFR Calculator</h3>
 <label for="serumCreatinine">Serum Creatinine (mg/dL):</label>
-<input onchange="calculateEGFR()" id="serumCreatinine" type="text" />
+<input id="serumCreatinine" type="text" />
 
 <label for="age">Age (years):</label>
-<input onchange="calculateEGFR()" id="age" type="text" />
+<input  id="age" type="text" />
 
 <label for="gender">Gender:</label>
-<input onchange="calculateEGFR()" id="genderMale" checked="checked" name="gender" type="radio" value="male" />
+<input id="genderMale" checked="checked" name="gender" type="radio" value="male" />
 <label for="genderMale">Male</label>
-<input onchange="calculateEGFR()" id="genderFemale" name="gender" type="radio" value="female" />
+<input id="genderFemale" name="gender" type="radio" value="female" />
 <label for="genderFemale">Female</label>
-
+<button onclick="calculateEGFR()">Calculate eGFR</button>
+<br>
 eGFR: <span id="result"></span> mL/min/1.73m<sup>2</sup>
 </body>
 </html>
