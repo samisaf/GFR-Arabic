@@ -11,7 +11,7 @@
     integrity="sha384-X38yfunGUhNzHpBaEBsWLO+A0HDYOQi8ufWDkZ0k9e0eXz/tH3II7uKZ9msv++Ls" crossorigin="anonymous">
 </head>
 
-<body>
+<body style="padding: 5px 5px 5px 5px;">
   <script>
     function calculateEGFR() {
       var Scr = parseFloat(document.getElementById('serumCreatinine').value);
@@ -31,7 +31,7 @@
       let term2 = 0.9938 ** Age;
       let term3 = Gender == "Male" ? 1 : 1.012;
       gfr = term1 * term2 * term3
-      document.getElementById('result').innerHTML = gfr.toFixed(2);
+      if (!isNaN(gfr)) document.getElementById('result').innerHTML = gfr.toFixed(2);
       return term1 * term2 * term3
     }
     document.calculateEGFR = calculateEGFR
