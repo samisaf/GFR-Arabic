@@ -30,15 +30,15 @@ let description = [
 let aboutMessage = "هذا البرنامج من إعداد الدكتور سامي صفدي. يمكن مراسلتنا بالنقر على هذا "
 
 function calcGFR(Scr, Age, Gender) {
-  let A = (Gender == "Female") ? 0.7 : 0.9;
+  let A = (Gender === "Female") ? 0.7 : 0.9;
   let B = null;
-  if (Gender == "Female" && Scr <= 0.7) B = -0.241;
-  else if (Gender == "Female" && Scr > 0.7) B = -1.2;
-  else if (Gender == "Male" && Scr <= 0.9) B = -0.302;
-  else if (Gender == "Male" && Scr > 0.9) B = -1.2;
+  if (Gender === "Female" && Scr <= 0.7) B = -0.241;
+  else if (Gender === "Female" && Scr > 0.7) B = -1.2;
+  else if (Gender === "Male" && Scr <= 0.9) B = -0.302;
+  else if (Gender === "Male" && Scr > 0.9) B = -1.2;
   let term1 = 142 * (Scr / A) ** B;
   let term2 = 0.9938 ** Age;
-  let term3 = Gender == "Male" ? 1 : 1.012;
+  let term3 = Gender === "Male" ? 1 : 1.012;
   return term1 * term2 * term3
 }
 
